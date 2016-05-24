@@ -1,0 +1,19 @@
+{
+  "name": "webpack-tutorial",
+  "version": "1.0.0",
+  "description": "WebPack Tutorial http://webpack.github.io/docs/tutorials/getting-started/",
+  "main": "entry.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Oleg Varaksin",
+  "license": "ISC",
+  "devDependencies": {
+    "bundle-loader": "^0.5.4",
+    "css-loader": "^0.23.1",
+    "imports-loader": "^0.6.5",
+    "style-loader": "^0.13.1",
+    "webpack": "^1.13.0",
+    "webpack-dev-server": "^1.14.1"
+  }
+}
