@@ -1,7 +1,7 @@
 {
   "name": "webpack-tutorial",
   "version": "1.0.0",
-  "description": "WebPack Tutorial http://webpack.github.io/docs/tutorials/getting-started/",
+  "description": "POC for truly dynamic require with WebPack",
   "main": "entry.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

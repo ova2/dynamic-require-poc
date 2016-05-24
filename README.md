@@ -1,3 +1,3 @@
-# dynamic-require-poc
+# Inter-module communication with require and WebPack
 
-POC
+POC for truly dynamic require with WebPack
