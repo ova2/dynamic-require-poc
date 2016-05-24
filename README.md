@@ -1,0 +1,3 @@
+# dynamic-require-poc
+
+POC
