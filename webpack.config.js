@@ -1,5 +1,5 @@
 module.exports = {
-    entry: './entry.js',
+    entry: './own-module/entry.js',
     output: {
         //path: __dirname,
         path: './dist',

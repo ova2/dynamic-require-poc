@@ -1,5 +1,5 @@
 {
-  "name": "webpack-tutorial",
+  "name": "webpack-tutorial for truly dynamic require",
   "version": "1.0.0",
   "description": "POC for truly dynamic require with WebPack",
   "main": "entry.js",

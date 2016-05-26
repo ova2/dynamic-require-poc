@@ -4,12 +4,23 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 </head>
 <body>
-    <button id="btn">
+    <button data-init="button">
         Show message
     </button>
-    <p></p>    
+    <p></p>
+    <button data-init="button">
+        Show message
+    </button>
+    
+    <p></p>
+    
     <label>
-        <input type="checkbox" name="some" value="some">
+        <input data-init="checkbox" type="checkbox" name="some" value="some">
+        Show message
+    </label>
+    <p></p>
+    <label>
+        <input data-init="checkbox" type="checkbox" name="other" value="other">
         Show message
     </label>
 <script type="text/javascript" src="dist/bundle.js" charset="utf-8"></script>
