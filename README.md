@@ -1,3 +1,3 @@
-# Inter-module communication with require and WebPack
+# Lazy inter-module communication with require and webpack
 
-POC for truly dynamic require with WebPack
+POC for truly dynamic require with webpack
