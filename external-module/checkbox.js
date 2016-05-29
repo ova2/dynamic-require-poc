@@ -1,4 +1,4 @@
-var objectifier = require("./../util-module/objectifier.js");
+var lazyloader = require("./lazyloader");
 
 module.exports = {
     init: function () {
@@ -8,18 +8,16 @@ module.exports = {
                 var element = elements[i];
                 
                 var onchange = function () {
-                    var data = element.getAttribute("data-onchange");
-                    if (data) {
-                        var objData = JSON.parse(data);
-                        var module = objData[0];
-                        var func = objData[1];
+                    // so something module specific ...
 
-                        if (module && objectifier.exists(module) && func) {
-                            objectifier.get(module)(function (file) {
-                                file[func]();
-                            });
-                        }
-                    }
+                    // execute function defined via data-onclick attribute if it's defined,
+                    // e.g. data-onchange='["ownModules.checkbox", "alertSync"]'
+                    lazyloader.execute(element, 'data-onchange',
+                        function resolved(value) {
+                            alert(value);
+                        }, function rejected(error) {
+                            alert(error);
+                        });
                 };
 
                 element.addEventListener("change", onchange);

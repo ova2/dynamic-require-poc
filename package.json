@@ -1,10 +1,11 @@
 {
-  "name": "truly-dynamic-require-with_webpack",
+  "name": "truly-dynamic-require-with-webpack",
   "version": "1.0.0",
   "description": "POC for truly dynamic require with WebPack",
   "main": "entry.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "clean": "rimraf dist",
+    "build": "\"npm run clean\" && webpack"
   },
   "author": {
     "name": "Oleg Varaksin",
@@ -23,8 +24,11 @@
     "bundle-loader": "^0.5.4",
     "css-loader": "^0.23.1",
     "imports-loader": "^0.6.5",
+    "rimraf": "^2.5.2",
     "style-loader": "^0.13.1",
-    "webpack": "^1.13.0",
-    "webpack-dev-server": "^1.14.1"
+    "webpack": "^1.13.0"
+  },
+  "dependencies": {
+    "promise-light": "^0.1.8"
   }
 }
