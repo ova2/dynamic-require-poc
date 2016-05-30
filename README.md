@@ -211,7 +211,7 @@ It executes the specified function from the specified module. The caller receive
 
 ## Screens
 
-The initial load doesn't fetch chunks for custom button and checkbox code from the own modules. 
+The initial load doesn't fetch chunks from the own modules.
 
 ![Screenshot](https://raw.githubusercontent.com/ova2/dynamic-require-poc/master/init-load.png)
 
