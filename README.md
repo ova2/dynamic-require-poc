@@ -11,7 +11,7 @@ require.ensure(["module-a"], function(require) {
 });
 ```
 
-The well-known module bundler __Webpack__ supports this syntax for loading modules on demand. Such lazy loaded module(s) define a [Webpack_require_ensure][split point]. Split points split the codebase into "chunks" (separate JavaScript files) which are loaded on demand. This feature allows to keep the initial download small and only download the code when it's requested.
+The well-known module bundler __Webpack__ supports this syntax for loading modules on demand. Such lazy loaded module(s) define a [split point][split point]. Split points split the codebase into "chunks" (separate JavaScript files) which are loaded on demand. This feature allows to keep the initial download small and only download the code when it's requested.
 
 Webpack performs a static analysis of the code at the project build time. Dynamic information is only available at runtime and not available at build time. You have to define your modules as constants. This leads to the problem. This code will not work:
 
@@ -89,7 +89,7 @@ $ npm run build
 
 Install and run a web server afterwards, e.g. [Webserver_chrome][WebServer for Chrome]. Open `index.html`, e.g. in Chrome, and look the Network Tab when interacting with the web app.
 
-[Webpack_require_ensure]: https://webpack.github.io/docs/code-splitting.html
+[split point]: https://webpack.github.io/docs/code-splitting.html
 [Webpack_require_content]: https://webpack.github.io/docs/context.html
 [Bundle_loader]: https://github.com/webpack/bundle-loader
 [Promise_light]: https://www.npmjs.com/package/promise-light
