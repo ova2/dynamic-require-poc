@@ -29,7 +29,7 @@ Webpack says something like:
 Error: Module not found. A dependency to an entry point is not allowed.
 ```
 
-Theoretically you can use [Webpack_require_content][require.context], but this needs some parts of module's path as constants too. Now, imagine you develop a modular UI library and would like to provide some callbacks for certain events (event handlers). Users of your library use it as a third-party library. They want to register their custom callback functions from their own modules. And they want to be called lazy, on demand, when an event occurs. You have many users and your library doesn't know about custom modules of course. That means, you can not use hard-coded module's path and function's name a priori. What to do?
+Theoretically you can use [require.context][require.context], but this needs some parts of module's path as constants too. Now, imagine you develop a modular UI library and would like to provide some callbacks for certain events (event handlers). Users of your library use it as a third-party library. They want to register their custom callback functions from their own modules. And they want to be called lazy, on demand, when an event occurs. You have many users and your library doesn't know about custom modules of course. That means, you can not use hard-coded module's path and function's name a priori. What to do?
 
 ## Solution
 
@@ -42,7 +42,7 @@ own-modules         // some library with CommonJS modules which uses the third-p
 common-modules      // simple utility modules
 ```
 
-The modules in `external-modules` don't know about `own-modules`. Modules in the `own-modules` import modules from the `external-modules`. The most important webpack loader we use in this POC is [Bundle_loader][bundle loader for webpack]. This loader creates a special function with required module which can be lazy executed. The required module gets loaded when the function is executed.
+The modules in `external-modules` don't know about `own-modules`. Modules in the `own-modules` import modules from the `external-modules`. The most important webpack loader we use in this POC is [bundle loader for webpack][bundle loader for webpack]. This loader creates a special function with required module which can be lazy executed. The required module gets loaded when the function is executed.
 
 The HTML template backed the third-party (external) modules look like as follows (only short snippet):
 
@@ -64,9 +64,9 @@ The full code can be found in `index.xhtml`. The callback functions are defined 
 
 TODO
 
-[Promise_light][promise light]
+[promise light][promise light]
 
-[Deferred_object][jQuery Deferred Object]
+[jQuery Deferred Object][jQuery Deferred Object]
 
 Initial load
 
@@ -87,11 +87,11 @@ $ npm install
 $ npm run build
 ```
 
-Install and run a web server afterwards, e.g. [Webserver_chrome][WebServer for Chrome]. Open `index.html`, e.g. in Chrome, and look the Network Tab when interacting with the web app.
+Install and run a web server afterwards, e.g. [WebServer for Chrome][WebServer for Chrome]. Open `index.html`, e.g. in Chrome, and look the Network Tab when interacting with the web app.
 
 [split point]: https://webpack.github.io/docs/code-splitting.html
-[Webpack_require_content]: https://webpack.github.io/docs/context.html
-[Bundle_loader]: https://github.com/webpack/bundle-loader
-[Promise_light]: https://www.npmjs.com/package/promise-light
-[Deferred_object]: https://api.jquery.com/category/deferred-object
-[Webserver_chrome]: https://chrome.google.com/webstore/detail/web-server-for-chrome/ofhbbkphhbklhfoeikjpcbhemlocgigb?hl=en
+[require.context]: https://webpack.github.io/docs/context.html
+[bundle loader for webpack]: https://github.com/webpack/bundle-loader
+[promise light]: https://www.npmjs.com/package/promise-light
+[jQuery Deferred Object]: https://api.jquery.com/category/deferred-object
+[WebServer for Chrome]: https://chrome.google.com/webstore/detail/web-server-for-chrome/ofhbbkphhbklhfoeikjpcbhemlocgigb?hl=en
