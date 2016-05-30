@@ -154,7 +154,7 @@ module.exports = {
 };
 ```
 
-The core logic in encapsulated in the `lazyloader.js`.
+The core logic for the event handling is encapsulated in the `lazyloader.js`.
 
 ```js
 /**
@@ -207,7 +207,7 @@ module.exports = {
 };
 ```
 
-It executes the specified function from the specified module. The caller gets a promise. If the promise gets resolved, the first function in `.then(...)` is executed. If the promise gets rejected, the second function in `.then(...)` is executed. The synchronous or asynchronous function from the own modules can control whether it resolves or rejects the promise. The caller can decide then what it should do in both cases. For instance, assume you got an accordion widget which belongs to a third-party library. One interesting case could be the validation of an open accordion tab when the tab's header is clicked by the user. A custom function could validate the tab content on such click. In case of a successful validation, the clicked tab can be closed. Otherwise, the tab should stay open and show errors.
+It executes the specified function from the specified module. The caller receives a promise. If the promise gets resolved, the first function in `.then(...)` is executed. If the promise gets rejected, the second function in `.then(...)` is executed. The synchronous or asynchronous function from the own modules can control whether it resolves or rejects the promise. The caller can decide then what it should do in both cases. For instance, assume you got an accordion widget which belongs to a third-party library. One interesting case could be the validation of the content of an open accordion tab when the tab's header is clicked by the user. A custom function could validate the tab content on such click. In case of a successful validation, the clicked tab can be closed. Otherwise, the tab should stay open.
 
 ## Screens
 
