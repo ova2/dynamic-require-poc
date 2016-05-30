@@ -115,17 +115,111 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
 As you can see, the [bundle loader for webpack][bundle loader for webpack] is applied to the own modules. The returned functions are saved under arbitrary namespaces in order to be executed later in external modules. Note: the `objectifier` is just a CommonJS module porting of the beautiful [getter and setter implementation for nested objects][getter and setter implementation for nested objects]. 
 
-The caller gets a promise when invoking such asynchronous function. A promise normally has two 
+The `button.js` in the `external-modules` registers an onlick event handler for all HTML elements having the `data-init="button"` attribute.
 
-Initial load
+```js
+var lazyloader = require("./lazyloader");
+
+module.exports = {
+    init: function () {
+        var elements = document.querySelectorAll('[data-init="button"]');
+        for (var i = 0; i < elements.length; i++) {
+            (function () {
+                var element = elements[i];
+
+                // onlick event handler
+                var onclick = function () {
+                    // so something module specific ...
+
+                    // execute function defined via data-onclick attribute if it's defined,
+                    // e.g. data-onclick='["ownModules.button", "alertSync"]'
+                    lazyloader.execute(element, 'data-onclick',
+                        function resolved(value) {
+                            alert(value);
+                        }, function rejected(error) {
+                            alert(error);
+                        });
+                };
+
+                element.addEventListener("click", onclick);
+            })();
+        }
+
+        return elements;
+    },
+
+    doSomething: function () {
+        // ...
+    }
+};
+```
+
+The core logic in encapsulated in the `lazyloader.js`.
+
+```js
+/**
+ Loads modules specified via data-* attributes and executes the specified function.
+ HTML-Example:
+
+ <button data-init="button" data-onclick='["ownModules.button", "alertSync"]'>
+    ...
+ </button>
+
+ The function ownModules.button.alertSync(button) will be executed.
+ */
+
+var objectifier = require("./../common-modules/objectifier");
+
+module.exports = {
+    /**
+     * Executes the specified synchronous or asynchronous function from the specified module
+     * and invokes resolved or rejected callbacks respectively.
+     * The function should return a promise.
+     * 
+     * @param element HTML element where data-* is defined
+     * @param data value of data-* as string
+     * @param resolvedCallback callback which gets executed when the returned promise is fullfilled
+     * @param rejectedCallback callback which gets executed when the returned promise is rejected
+     */
+    execute: function (element, data, resolvedCallback, rejectedCallback) {
+        var strData = element.getAttribute(data);
+        if (strData) {
+            var objData = JSON.parse(strData);
+            var module = objData[0];
+            var func = objData[1];
+
+            if (module && objectifier.exists(module) && func) {
+                // module and function exist ==> load the module
+                objectifier.get(module)(function (module) {
+                    // execute the specified function from the module.
+                    // return value is a promise (see https://www.npmjs.com/package/promise-light)
+                    module[func](element).then(
+                        function resolved(value) {
+                            resolvedCallback(value);
+                        },
+                        function rejected(error) {
+                            rejectedCallback(error);
+                        });
+                });
+            }
+        }
+    }
+};
+```
+
+It executes the specified function from the specified module. The caller gets a promise. If the promise gets resolved, the first function in `.then(...)` is executed. If the promise gets rejected, the second function in `.then(...)` is executed. The synchronous or asynchronous function from the own modules can control whether it resolves or rejects the promise. The caller can decide then what it should do in both cases. For instance, assume you got an accordion widget which belongs to a third-party library. One interesting case could be the validation of an open accordion tab when the tab's header is clicked by the user. A custom function could validate the tab content on such click. In case of a successful validation, the clicked tab can be closed. Otherwise, the tab should stay open and show errors.
+
+## Screens
+
+The initial load doesn't fetch chunks for custom button and checkbox code from the own modules. 
 
 ![Screenshot](https://raw.githubusercontent.com/ova2/dynamic-require-poc/master/init-load.png)
 
-First chunk is loaded
+Click on a button triggers the load of the first chunk.
 
 ![Screenshot](https://raw.githubusercontent.com/ova2/dynamic-require-poc/master/chunk-1.png)
 
-Second chunk is loaded
+Click on a checkbox triggers the load of the second chunk.
 
 ![Screenshot](https://raw.githubusercontent.com/ova2/dynamic-require-poc/master/chunk-2.png)
 

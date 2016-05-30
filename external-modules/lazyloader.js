@@ -13,7 +13,7 @@ var objectifier = require("./../common-modules/objectifier");
 
 module.exports = {
     /**
-     * Executes the specified synchron or asynchron function from a module
+     * EExecutes the specified synchronous or asynchronous function from the specified module
      * and invokes resolved or rejected callbacks respectively.
      * The function should return a promise.
      * 
