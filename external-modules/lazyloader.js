@@ -9,7 +9,7 @@
  The function ownModules.button.alertSync(button) will be executed.
  */
 
-var objectifier = require("./../common-module/objectifier");
+var objectifier = require("./../common-modules/objectifier");
 
 module.exports = {
     /**

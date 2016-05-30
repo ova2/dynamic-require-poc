@@ -2,7 +2,7 @@ var webpack = require('webpack');
 
 module.exports = {
     entry: {
-        app: './own-module/entry.js',
+        app: './own-modules/entry.js',
         vendor: ['promise-light']
     },
     output: {

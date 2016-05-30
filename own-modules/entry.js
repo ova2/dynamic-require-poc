@@ -1,5 +1,5 @@
-var objectifier = require("./../common-module/objectifier");
-var bootstrap = require("./../external-module/bootstrap");
+var objectifier = require("./../common-modules/objectifier");
+var bootstrap = require("./../external-modules/bootstrap");
 
 document.addEventListener("DOMContentLoaded", function (event) {    
     // initialize external modules
